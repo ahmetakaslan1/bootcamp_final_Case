@@ -13,7 +13,7 @@ public class I18nConfig {
     public MessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
         messageSource.setBasename("classpath:messages");
-        messageSource.setDefaultEncoding("UTF-8"); // UTF-8'i zorunlu kılıyoruz
+        messageSource.setDefaultEncoding("UTF-8"); 
         return messageSource;
     }
 

@@ -15,7 +15,7 @@ import com.akaslan.orderservice.entity.OrderStatus;
 import com.akaslan.orderservice.repository.OrderRepository;
 import com.akaslan.orderservice.service.OrderService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,13 +28,13 @@ public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
     private final CartClient cartClient; 
-    private final RabbitTemplate rabbitTemplate; 
+    private final ApplicationEventPublisher eventPublisher; 
 
     @Override
     @Transactional
     public OrderResponse createOrder(String customerId, OrderRequest request) {
         
-        // 1. Müşterinin sepetini çek
+        
         CartResponse cart = null;
         try {
             var response = cartClient.getMyCart();
@@ -49,12 +49,15 @@ public class OrderServiceImpl implements OrderService {
             throw new IllegalArgumentException("Sepetiniz boş! Sipariş oluşturulamaz.");
         }
 
-        // 2. Siparişi Veritabanına Kaydet (CREATED statüsünde)
+     
         Order order = new Order();
         order.setOrderNumber(UUID.randomUUID().toString());
         order.setCustomerId(customerId);
         order.setTotalPrice(cart.totalPrice());
         order.setStatus(OrderStatus.CREATED);
+        order.setShippingAddress(request.shippingAddress());
+        order.setReceiverName(request.receiverName());
+        order.setPhoneNumber(request.phoneNumber());
 
         List<OrderItem> orderItems = cart.items().stream()
             .map(ci -> OrderItem.builder()
@@ -68,7 +71,7 @@ public class OrderServiceImpl implements OrderService {
         order.setItems(orderItems);
         Order savedOrder = orderRepository.save(order);
 
-        // 3. RabbitMQ'ya Sipariş Oluşturuldu Olayını Fırlat (OrderCreatedEvent)
+     
         PaymentInfoEventDto paymentInfo = new PaymentInfoEventDto(
             request.cardNumber(),
             request.expireMonth(),
@@ -89,10 +92,8 @@ public class OrderServiceImpl implements OrderService {
             paymentInfo
         );
 
-        rabbitTemplate.convertAndSend(RabbitMQConfig.SAGA_EXCHANGE, RabbitMQConfig.ORDER_CREATED_ROUTING_KEY, event);
+        eventPublisher.publishEvent(event);
 
-        // Not: Sepeti temizleme işlemi artık PaymentSuccessfulEvent dinleyicisine (Listener) bırakıldı.
-        
         return OrderResponse.from(savedOrder);
     }
 

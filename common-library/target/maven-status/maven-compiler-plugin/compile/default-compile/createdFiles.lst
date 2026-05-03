@@ -1,11 +1,13 @@
-com\akaslan\common\exception\GlobalExceptionHandler.class
+com\akaslan\common\event\OrderFailedEvent.class
 com\akaslan\common\event\InventoryDeductedEvent.class
 com\akaslan\common\exception\BusinessException.class
-com\akaslan\common\event\OrderItemEventDto.class
 com\akaslan\common\exception\ResourceNotFoundException.class
+com\akaslan\common\event\PaymentSuccessfulEvent.class
+com\akaslan\common\dto\ApiResponse.class
+com\akaslan\common\exception\GlobalExceptionHandler.class
+com\akaslan\common\event\OrderItemEventDto.class
+com\akaslan\common\event\PaymentFailedEvent.class
 com\akaslan\common\config\I18nConfig.class
 com\akaslan\common\event\OrderCreatedEvent.class
 com\akaslan\common\util\JwtUtils.class
-com\akaslan\common\event\PaymentSuccessfulEvent.class
-com\akaslan\common\dto\ApiResponse.class
 com\akaslan\common\event\PaymentInfoEventDto.class

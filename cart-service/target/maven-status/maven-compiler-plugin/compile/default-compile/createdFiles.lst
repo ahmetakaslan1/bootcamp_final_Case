@@ -1,6 +1,7 @@
 com\akaslan\cartservice\service\impl\CartServiceImpl.class
 com\akaslan\cartservice\config\SecurityConfig.class
 com\akaslan\cartservice\repository\CartRepository.class
+com\akaslan\cartservice\config\FeignConfig.class
 com\akaslan\cartservice\model\Cart$CartBuilder.class
 com\akaslan\cartservice\model\CartItem.class
 com\akaslan\cartservice\model\Cart.class

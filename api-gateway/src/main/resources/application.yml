@@ -8,8 +8,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          # jwk-set-uri: issuer-uri'nin aksine gateway'i BAŞLARKEN Keycloak'a bağlamaz.
-          # Token geldiğinde lazy olarak çağrılır. Realm henüz yokken güvenli başlatır.
+         
           jwk-set-uri: http://localhost:9090/realms/akaslan/protocol/openid-connect/certs
   cloud:
     gateway:

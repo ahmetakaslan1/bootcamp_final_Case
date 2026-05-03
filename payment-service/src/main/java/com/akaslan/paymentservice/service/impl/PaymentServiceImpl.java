@@ -20,16 +20,16 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     @Transactional
     public Payment processPayment(PaymentRequest request) {
-        // Idempotency: aynı order için ödeme kaydı varsa tekrar provider çağırma.
+        // aynı  ödeme kaydı varsa tekrar provider çağırma engel iyorum.
         var existingPayment = paymentRepository.findByOrderId(request.orderId());
         if (existingPayment.isPresent()) {
             return existingPayment.get();
         }
 
-        // İlgili Provider (Iyzico) üzerinden ödemeyi çek.
+      
         boolean isSuccess = paymentProvider.pay(request);
 
-        // Veritabanına işlemi logla.
+       //log
         Payment payment = Payment.builder()
             .orderId(request.orderId())
             .amount(request.amount())

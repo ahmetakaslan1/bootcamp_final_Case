@@ -10,17 +10,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/orders")
 @RequiredArgsConstructor
+@Tag(name = "Sipariş Yönetimi", description = "Müşterilerin sipariş oluşturma ve görüntüleme işlemleri")
 public class OrderController {
 
     private final OrderService orderService;
 
     @PostMapping
+    @Operation(summary = "Sipariş Oluştur", description = "Müşterinin sepetindeki ürünler için sipariş oluşturur ve ödeme sürecini başlatır")
     public ResponseEntity<ApiResponse<OrderResponse>> createOrder(
             @AuthenticationPrincipal Jwt jwt,
             @Valid @RequestBody OrderRequest request) {
@@ -29,6 +33,7 @@ public class OrderController {
     }
 
     @GetMapping
+    @Operation(summary = "Siparişlerimi Getir", description = "Giriş yapmış müşterinin geçmiş tüm siparişlerini listeler")
     public ResponseEntity<ApiResponse<List<OrderResponse>>> getMyOrders(@AuthenticationPrincipal Jwt jwt) {
         return ResponseEntity.ok(ApiResponse.success(orderService.getOrdersByCustomer(jwt.getSubject())));
     }

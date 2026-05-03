@@ -7,4 +7,5 @@ public interface InventoryService {
     InventoryResponse getInventoryByProductId(Long productId);
     InventoryResponse updateInventory(InventoryRequest request);
     void deductInventory(Long productId, Integer quantityToDeduct);
+    void restoreInventory(Long productId, Integer quantityToRestore);
 }

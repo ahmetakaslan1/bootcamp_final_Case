@@ -2,6 +2,7 @@ C:\Users\akasl\Desktop\N11 Backend\Bitirme_proje\common-library\src\main\java\co
 C:\Users\akasl\Desktop\N11 Backend\Bitirme_proje\common-library\src\main\java\com\akaslan\common\dto\ApiResponse.java
 C:\Users\akasl\Desktop\N11 Backend\Bitirme_proje\common-library\src\main\java\com\akaslan\common\event\InventoryDeductedEvent.java
 C:\Users\akasl\Desktop\N11 Backend\Bitirme_proje\common-library\src\main\java\com\akaslan\common\event\OrderCreatedEvent.java
+C:\Users\akasl\Desktop\N11 Backend\Bitirme_proje\common-library\src\main\java\com\akaslan\common\event\OrderFailedEvent.java
 C:\Users\akasl\Desktop\N11 Backend\Bitirme_proje\common-library\src\main\java\com\akaslan\common\event\OrderItemEventDto.java
 C:\Users\akasl\Desktop\N11 Backend\Bitirme_proje\common-library\src\main\java\com\akaslan\common\event\PaymentFailedEvent.java
 C:\Users\akasl\Desktop\N11 Backend\Bitirme_proje\common-library\src\main\java\com\akaslan\common\event\PaymentInfoEventDto.java

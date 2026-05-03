@@ -11,15 +11,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/api/v1/payments")
 @RequiredArgsConstructor
+@Tag(name = "Ödeme İşlemleri", description = "Siparişlere ait Iyzico vb. altyapılarla ödeme çekim işlemleri")
 public class PaymentController {
 
     private final PaymentService paymentService;
 
     @PostMapping
+    @Operation(summary = "Ödeme Al", description = "Sipariş verildikten sonra kredi kartından tutarı çeker")
     public ResponseEntity<ApiResponse<Payment>> processPayment(
             @AuthenticationPrincipal Jwt jwt, 
             @Valid @RequestBody PaymentRequest request) {

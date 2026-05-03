@@ -19,10 +19,11 @@ public class SecurityConfig {
             .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/actuator/health").permitAll()
+                .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                 .requestMatchers("/api/v1/carts/internal/**").permitAll()
-                .anyRequest().authenticated() // Sepet işlemleri her zaman yetki (giriş) gerektirir
+                .anyRequest().authenticated() 
             )
-            .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> {})); // Yetki (Rol) kontrolüne gerek yok, sadece giriş yapsın yeter
+            .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> {})); 
 
         return http.build();
     }

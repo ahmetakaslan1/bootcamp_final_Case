@@ -2,6 +2,7 @@ package com.akaslan.inventoryservice.listener;
 
 import com.akaslan.common.event.InventoryDeductedEvent;
 import com.akaslan.common.event.OrderCreatedEvent;
+import com.akaslan.common.event.OrderFailedEvent;
 import com.akaslan.common.event.OrderItemEventDto;
 import com.akaslan.inventoryservice.config.RabbitMQConfig;
 import com.akaslan.inventoryservice.service.InventoryService;
@@ -20,12 +21,12 @@ public class InventoryEventListener {
     @RabbitListener(queues = "order.created.queue")
     public void handleOrderCreated(OrderCreatedEvent event) {
         try {
-            // Sepetteki tüm ürünlerin stoğunu düşüyoruz
+          
             for (OrderItemEventDto item : event.items()) {
                 inventoryService.deductInventory(item.productId(), item.quantity());
             }
 
-            // Stok düşümü başarılıysa, Payment Service'in dinleyeceği olayı fırlatıyoruz
+        
             InventoryDeductedEvent deductedEvent = new InventoryDeductedEvent(
                 event.orderId(),
                 event.customerId(),
@@ -37,7 +38,19 @@ public class InventoryEventListener {
 
         } catch (Exception e) {
             System.err.println("Stok düşülemedi (Sipariş ID: " + event.orderId() + "): " + e.getMessage());
-            // TODO: İleride OrderCancelledEvent fırlatılıp sipariş iptal edilebilir.
+
+        }
+    }
+
+    @RabbitListener(queues = "order.failed.queue")
+    public void handleOrderFailed(OrderFailedEvent event) {
+        try {
+            System.out.println("Ödeme başarısız veya Sipariş iptal, Stoklar geri yükleniyor... Sipariş ID: " + event.orderId());
+            for (OrderItemEventDto item : event.items()) {
+                inventoryService.restoreInventory(item.productId(), item.quantity());
+            }
+        } catch (Exception e) {
+            System.err.println("Stok iadesi yapılamadı (Sipariş ID: " + event.orderId() + "): " + e.getMessage());
         }
     }
 }

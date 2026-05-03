@@ -4,6 +4,7 @@ com\akaslan\inventoryservice\dto\InventoryRequest.class
 com\akaslan\inventoryservice\InventoryServiceApplication.class
 com\akaslan\inventoryservice\config\RabbitMQConfig.class
 com\akaslan\inventoryservice\listener\InventoryEventListener.class
+com\akaslan\inventoryservice\client\ProductClient.class
 com\akaslan\inventoryservice\dto\InventoryResponse.class
 com\akaslan\inventoryservice\controller\InventoryController.class
 com\akaslan\inventoryservice\config\SecurityConfig.class

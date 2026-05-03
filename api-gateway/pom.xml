@@ -15,26 +15,25 @@
     <name>api-gateway</name>
 
     <dependencies>
-        <!-- Spring Cloud Gateway — WebFlux tabanlı, starter-web ile KULLANILMAZ -->
+       
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway</artifactId>
         </dependency>
 
-        <!-- Eureka Client — lb:// prefix ile load-balanced routing için -->
+      
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
 
-        <!-- JWT doğrulama — Gateway'deki SecurityConfig için -->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
         </dependency>
 
-        <!-- Ortak exception yapıları -->
-        <!-- spring-boot-starter-web EXCLUDE edildi: gateway WebFlux kullanır, Servlet stack çakışır -->
+      
         <dependency>
             <groupId>com.akaslan</groupId>
             <artifactId>common-library</artifactId>
@@ -50,6 +49,11 @@
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+                </exclusion>
+               
+                <exclusion>
+                    <groupId>org.springdoc</groupId>
+                    <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>

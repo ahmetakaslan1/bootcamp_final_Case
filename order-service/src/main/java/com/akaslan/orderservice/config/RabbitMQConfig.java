@@ -18,7 +18,8 @@ public class RabbitMQConfig {
     public static final String ORDER_CREATED_ROUTING_KEY = "order.created.routing.key";
     public static final String PAYMENT_SUCCESS_ROUTING_KEY = "payment.success.routing.key";
     public static final String PAYMENT_FAILED_ROUTING_KEY = "payment.failed.routing.key";
-
+    public static final String ORDER_FAILED_QUEUE = "order.failed.queue";
+    public static final String ORDER_FAILED_ROUTING_KEY = "order.failed.routing.key";
     @Bean
     public Queue orderCreatedQueue() {
         return new Queue(ORDER_CREATED_QUEUE, true);
@@ -32,6 +33,11 @@ public class RabbitMQConfig {
     @Bean
     public Queue paymentFailedQueue() {
         return new Queue(PAYMENT_FAILED_QUEUE, true);
+    }
+
+    @Bean
+    public Queue orderFailedQueue() {
+        return new Queue(ORDER_FAILED_QUEUE, true);
     }
 
     @Bean
@@ -52,6 +58,11 @@ public class RabbitMQConfig {
     @Bean
     public Binding bindingPaymentFailed() {
         return BindingBuilder.bind(paymentFailedQueue()).to(sagaExchange()).with(PAYMENT_FAILED_ROUTING_KEY);
+    }
+
+    @Bean
+    public Binding bindingOrderFailed() {
+        return BindingBuilder.bind(orderFailedQueue()).to(sagaExchange()).with(ORDER_FAILED_ROUTING_KEY);
     }
 
     @Bean
