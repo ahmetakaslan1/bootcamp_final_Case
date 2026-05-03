@@ -1,0 +1,37 @@
+{
+  "navbar": {
+    "title": "N11 Bootcamp",
+    "home": "Home",
+    "cart": "Cart",
+    "login": "Login",
+    "logout": "Logout",
+    "welcome": "Welcome, {name}",
+    "orders": "My Orders"
+  },
+  "home": {
+    "all_products": "All Products",
+    "no_products": "No products available or Backend is down."
+  },
+  "cart": {
+    "add_to_cart": "Add to Cart",
+    "out_of_stock": "Out of Stock",
+    "clear_cart": "Clear Cart",
+    "products": "Products",
+    "quantity": "Qty",
+    "buy": "Buy Now"
+  },
+  "checkout": {
+    "title": "Checkout & Payment",
+    "pay": "Pay",
+    "delivery_info": "Delivery Information",
+    "card_info": "Card Information",
+    "complete_payment": "Complete Payment",
+    "back_to_cart": "Back to Cart",
+    "order_summary": "Order Summary",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "free": "Free",
+    "total": "Total",
+    "empty_cart_warning": "Add items to your cart to checkout."
+  }
+}
