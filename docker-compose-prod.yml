@@ -1,9 +1,7 @@
 version: '3.8'
 
 services:
-  # ==========================================
-  # INFRASTRUCTURE SERVICES
-  # ==========================================
+
   postgres-db:
     image: postgres:15-alpine
     container_name: postgres-db
@@ -43,7 +41,7 @@ services:
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
     ports:
-      - "15672:15672" # Sadece yönetim ekranı dışarı açık
+      - "15672:15672" 
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
     networks:
@@ -101,7 +99,7 @@ services:
         SERVICE_NAME: api-gateway
     container_name: api-gateway
     ports:
-      - "8080:8080" # API Gateway dışarı açık
+      - "8080:8080" # API Gateway dışarı açtım
     environment:
       - SPRING_PROFILES_ACTIVE=prod
       - FRONTEND_URL=${FRONTEND_URL}
