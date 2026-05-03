@@ -1,0 +1,13 @@
+FROM eclipse-temurin:21-jdk-alpine AS builder
+WORKDIR /app
+COPY . .
+# Projeyi derle (Testleri atlayarak)
+RUN ./mvnw clean package -DskipTests
+
+FROM eclipse-temurin:21-jre-alpine
+WORKDIR /app
+# ARG ile servis adını dinamik alıyoruz (Örn: order-service)
+ARG SERVICE_NAME
+COPY --from=builder /app/${SERVICE_NAME}/target/*.jar app.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "app.jar"]
