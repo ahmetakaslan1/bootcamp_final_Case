@@ -1,0 +1,11 @@
+com\akaslan\productservice\dto\ProductRequest.class
+com\akaslan\productservice\dto\ProductResponse.class
+com\akaslan\productservice\controller\ProductController.class
+com\akaslan\productservice\entity\Product$ProductBuilder.class
+com\akaslan\productservice\service\ProductService.class
+com\akaslan\productservice\ProductServiceApplication.class
+com\akaslan\productservice\service\impl\ProductServiceImpl.class
+com\akaslan\productservice\config\SecurityConfig.class
+com\akaslan\productservice\entity\Product.class
+com\akaslan\productservice\repository\ProductRepository.class
+com\akaslan\productservice\config\RedisConfig.class

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- ================================================================
+         ANA EBEVEYN: Spring Boot tüm versiyonları yönetir.
+         Alt modüllerin spring-boot-starter-parent'a tekrar parent
+         tanımlamasına GEREK YOKTUR; bu POM zaten devralıyor.
+    ================================================================ -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.4.0</version>
+        <relativePath/>
+    </parent>
+
+    <!-- ================================================================
+         PROJE KİMLİĞİ
+    ================================================================ -->
+    <groupId>com.akaslan</groupId>
+    <artifactId>akaslan-ecommerce</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>akaslan-ecommerce</name>
+    <description>Akaslan Production-Grade E-Commerce Microservices Platform</description>
+
+    <!-- ================================================================
+         ALT MODÜLLER — Maven bu klasörleri sırayla build eder.
+         common-library EN ÖNCE olmalı (diğerleri ona bağımlı).
+    ================================================================ -->
+    <modules>
+        <module>common-library</module>
+        <module>discovery-server</module>
+        <module>api-gateway</module>
+        <module>product-service</module>
+        <module>cart-service</module>
+        <module>order-service</module>
+        <module>inventory-service</module>
+        <module>payment-service</module>
+    </modules>
+
+    <!-- ================================================================
+         GLOBAL ÖZELLİKLER
+    ================================================================ -->
+    <properties>
+        <java.version>21</java.version>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!-- Spring Cloud versiyonu Spring Boot 3.5.x ile uyumlu -->
+        <spring-cloud.version>2024.0.1</spring-cloud.version>
+    </properties>
+
+    <!-- ================================================================
+         BAĞIMLILIK YÖNETİMİ — Bu bölüm ZORUNLU bağımlılık eklemez.
+         Sadece "Bu kütüphaneyi kullanırsan bu versiyonu kullan" der.
+         Her modül kendi pom.xml'inde sadece groupId + artifactId yazar.
+    ================================================================ -->
+    <dependencyManagement>
+        <dependencies>
+
+            <!-- Spring Cloud BOM -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Dahili common-library — tüm servisler bu versiyonu kullanır -->
+            <dependency>
+                <groupId>com.akaslan</groupId>
+                <artifactId>common-library</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- ================================================================
+         PLUGIN YÖNETİMİ
+         spring-boot-maven-plugin burada merkezi olarak tanımlanır.
+         common-library bu plugin'i skip=true ile override edecek
+         (fat jar oluşturulmaması için).
+    ================================================================ -->
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <configuration>
+                        <excludes>
+                            <exclude>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                            </exclude>
+                        </excludes>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+</project>

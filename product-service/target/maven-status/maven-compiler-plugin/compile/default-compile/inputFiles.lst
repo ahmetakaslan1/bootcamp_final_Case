@@ -1,0 +1,12 @@
+C:\Users\akasl\Desktop\N11 Backend\Bitirme_proje\product-service\src\main\java\com\akaslan\productservice\client\InventoryClient.java
+C:\Users\akasl\Desktop\N11 Backend\Bitirme_proje\product-service\src\main\java\com\akaslan\productservice\client\InventoryResponse.java
+C:\Users\akasl\Desktop\N11 Backend\Bitirme_proje\product-service\src\main\java\com\akaslan\productservice\config\RedisConfig.java
+C:\Users\akasl\Desktop\N11 Backend\Bitirme_proje\product-service\src\main\java\com\akaslan\productservice\config\SecurityConfig.java
+C:\Users\akasl\Desktop\N11 Backend\Bitirme_proje\product-service\src\main\java\com\akaslan\productservice\controller\ProductController.java
+C:\Users\akasl\Desktop\N11 Backend\Bitirme_proje\product-service\src\main\java\com\akaslan\productservice\dto\ProductRequest.java
+C:\Users\akasl\Desktop\N11 Backend\Bitirme_proje\product-service\src\main\java\com\akaslan\productservice\dto\ProductResponse.java
+C:\Users\akasl\Desktop\N11 Backend\Bitirme_proje\product-service\src\main\java\com\akaslan\productservice\entity\Product.java
+C:\Users\akasl\Desktop\N11 Backend\Bitirme_proje\product-service\src\main\java\com\akaslan\productservice\ProductServiceApplication.java
+C:\Users\akasl\Desktop\N11 Backend\Bitirme_proje\product-service\src\main\java\com\akaslan\productservice\repository\ProductRepository.java
+C:\Users\akasl\Desktop\N11 Backend\Bitirme_proje\product-service\src\main\java\com\akaslan\productservice\service\impl\ProductServiceImpl.java
+C:\Users\akasl\Desktop\N11 Backend\Bitirme_proje\product-service\src\main\java\com\akaslan\productservice\service\ProductService.java

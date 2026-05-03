@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.akaslan</groupId>
+        <artifactId>akaslan-ecommerce</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>common-library</artifactId>
+    <!-- JAR packaging — fat jar DEĞİL, normal kütüphane jar'ı -->
+    <packaging>jar</packaging>
+    <name>common-library</name>
+    <description>
+        Shared infrastructure: ApiResponse wrapper, GlobalExceptionHandler,
+        JwtUtils ve servisler arası ortak DTO'lar.
+        Bu modül tek başına ayağa KALKMAZ (main sınıfı yok).
+    </description>
+
+
+
+
+    <dependencies>
+
+        <!-- Web bağımlılığı: @RestControllerAdvice, ResponseEntity, HttpStatus için gerekli -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- Spring Security: SecurityContextHolder, Authentication, JwtAuthenticationToken için -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!-- OAuth2 Resource Server: Jwt sınıfı ve JwtAuthenticationToken için -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+        </dependency>
+
+        <!-- Bean Validation: @Valid, @NotBlank vb. annotation desteği -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
+        <!-- Lombok: @Slf4j, @Getter vb. boilerplate azaltma -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- RabbitMQ (AMQP) Starter -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!-- KRİTİK: Bu modül sadece library, fat jar oluşturulmamalı -->
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
