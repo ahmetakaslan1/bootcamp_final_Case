@@ -8,7 +8,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: ${KEYCLOAK_ISSUER_URI:http://keycloak-server:8080}/realms/akaslan/protocol/openid-connect/certs
+          jwk-set-uri: ${KEYCLOAK_ISSUER_URI:http://localhost:9090}/realms/akaslan/protocol/openid-connect/certs
   cloud:
     gateway:
       routes:
@@ -40,6 +40,6 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://${EUREKA_HOST:discovery-server}:8761/eureka/
+      defaultZone: http://${EUREKA_HOST:localhost}:8761/eureka/
   instance:
     prefer-ip-address: true

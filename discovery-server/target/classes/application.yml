@@ -3,11 +3,11 @@ server:
 
 spring:
   application:
-    name: discovery-server
+    name: localhost
 
 eureka:
   instance:
-    hostname: ${EUREKA_HOST:discovery-server}
+    hostname: ${EUREKA_HOST:localhost}
   client:
     register-with-eureka: false
     fetch-registry: false
@@ -15,3 +15,4 @@ eureka:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
   server:
     wait-time-in-ms-when-sync-empty: 0
+
