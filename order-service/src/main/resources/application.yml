@@ -7,8 +7,8 @@ spring:
   application:
     name: order-service
   datasource:
-    url: jdbc:postgresql://localhost:5432/order_db
-    username: ${DB_USERNAME}
+    url: jdbc:postgresql://${DB_HOST:localhost}:5432/order_db
+    username: ${DB_USERNAME:akaslan_prod}
     password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
   jpa:
@@ -22,15 +22,23 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: http://localhost:9090/realms/akaslan/protocol/openid-connect/certs
+          jwk-set-uri: ${KEYCLOAK_ISSUER_URI:http://localhost:9090}/realms/akaslan/protocol/openid-connect/certs
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: 5672
+    username: ${RABBITMQ_USER:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
 
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://${EUREKA_HOST:localhost}:8761/eureka/
   instance:
-    prefer-ip-address: true
+    hostname: localhost
+    prefer-ip-address: ${EUREKA_PREFER_IP:false}
 
 integration:
   cart:
     internal-api-key: ${INTERNAL_API_KEY:local-dev-internal-key}
+
+
