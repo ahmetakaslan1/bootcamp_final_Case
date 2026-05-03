@@ -83,6 +83,7 @@ services:
     container_name: discovery-server
     environment:
       - SPRING_PROFILES_ACTIVE=prod
+      - EUREKA_PREFER_IP=true
     networks:
       - ecommerce-net
     depends_on:
@@ -102,6 +103,7 @@ services:
       - "8080:8080" # API Gateway dışarı açtım
     environment:
       - SPRING_PROFILES_ACTIVE=prod
+      - EUREKA_PREFER_IP=true
       - FRONTEND_URL=${FRONTEND_URL}
       - KEYCLOAK_ISSUER_URI=${KEYCLOAK_ISSUER_URI}
     networks:
@@ -119,6 +121,7 @@ services:
     container_name: product-service
     environment:
       - SPRING_PROFILES_ACTIVE=prod
+      - EUREKA_PREFER_IP=true
       - DB_HOST=postgres-db
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_USER=${DB_USER}
@@ -138,6 +141,7 @@ services:
     container_name: inventory-service
     environment:
       - SPRING_PROFILES_ACTIVE=prod
+      - EUREKA_PREFER_IP=true
       - DB_HOST=postgres-db
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_USER=${DB_USER}
@@ -159,6 +163,7 @@ services:
     container_name: order-service
     environment:
       - SPRING_PROFILES_ACTIVE=prod
+      - EUREKA_PREFER_IP=true
       - DB_HOST=postgres-db
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_USER=${DB_USER}
@@ -180,6 +185,7 @@ services:
     container_name: cart-service
     environment:
       - SPRING_PROFILES_ACTIVE=prod
+      - EUREKA_PREFER_IP=true
       - REDIS_HOST=redis-cache
       - KEYCLOAK_ISSUER_URI=${KEYCLOAK_ISSUER_URI}
     networks:
@@ -197,6 +203,7 @@ services:
     container_name: payment-service
     environment:
       - SPRING_PROFILES_ACTIVE=prod
+      - EUREKA_PREFER_IP=true
       - DB_HOST=postgres-db
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_USER=${DB_USER}

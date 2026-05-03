@@ -19,9 +19,11 @@ eureka:
     service-url:
       defaultZone: http://${EUREKA_HOST:localhost}:8761/eureka/
   instance:
-    prefer-ip-address: true
+    hostname: localhost
+    prefer-ip-address: ${EUREKA_PREFER_IP:false}
 
 integration:
   cart:
     internal-api-key: ${INTERNAL_API_KEY:local-dev-internal-key}
+
 
