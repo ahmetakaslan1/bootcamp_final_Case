@@ -21,7 +21,7 @@ spring:
       resourceserver:
         jwt:
           # Keycloak'ın dış IP adresi üzerinden doğrulanması sağlanır
-          issuer-uri: ${KEYCLOAK_ISSUER_URI:http://localhost:9090/realms/akaslan}
+          issuer-uri: ${KEYCLOAK_ISSUER_URI:http://34.122.181.181:9090/realms/akaslan}
 
 eureka:
   client:

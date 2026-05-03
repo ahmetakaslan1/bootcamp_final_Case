@@ -13,7 +13,7 @@ import java.util.List;
 @Configuration
 public class CorsConfig {
 
-    @Value("${FRONTEND_URL:http://localhost:3000}")
+    @Value("${FRONTEND_URL:http://34.122.181.181:3000}")
     private String frontendUrl;
 
     @Bean
