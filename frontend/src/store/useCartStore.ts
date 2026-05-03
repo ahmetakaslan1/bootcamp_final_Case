@@ -53,7 +53,7 @@ export const useCartStore = create<CartStore>((set) => ({
       let json;
       try {
         json = await res.json();
-      } catch (err) {
+      } catch {
         throw new Error(`HTTP Error ${res.status}`);
       }
       
@@ -65,9 +65,10 @@ export const useCartStore = create<CartStore>((set) => ({
         // Backend'in "Bu ürün için yeterli stok bulunmuyor!" mesajı buradan yakalanacak
         alert("❌ Sepete Eklenemedi: " + (json.message || "Bilinmeyen bir hata oluştu."));
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Sepete eklenemedi", error);
-      alert("❌ Sunucu ile iletişim kurulamadı! Detay: " + error.message);
+      const message = error instanceof Error ? error.message : "Bilinmeyen hata";
+      alert("❌ Sunucu ile iletişim kurulamadı! Detay: " + message);
     }
   },
 
