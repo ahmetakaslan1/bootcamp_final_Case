@@ -13,7 +13,7 @@ export default function Navbar() {
   const { data: session, status } = useSession();
   const { cart, fetchCart } = useCartStore();
 
-  // Oturum açılır açılmaz kullanıcının mevcut sepetini getir
+  // Oturum açıldığında ilk in mevcut sepetini getir
   useEffect(() => {
     if (session?.accessToken) {
       fetchCart();
