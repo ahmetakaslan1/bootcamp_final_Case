@@ -65,6 +65,11 @@ export default function Navbar() {
           <div className="h-10 w-24 bg-slate-100 animate-pulse rounded-md"></div>
         ) : session ? (
           <div className="flex items-center gap-4 border-l pl-6 border-slate-200">
+            {session.user?.roles?.includes("ADMIN") && (
+              <Link href="/admin" className="text-sm font-bold text-orange-500 hover:text-orange-600 transition-colors bg-orange-50 px-3 py-1 rounded-full">
+                Admin Panel
+              </Link>
+            )}
             <Link href="/orders" className="text-sm font-medium text-slate-600 hover:text-orange-500 transition-colors">
               {t('navbar.orders')}
             </Link>
