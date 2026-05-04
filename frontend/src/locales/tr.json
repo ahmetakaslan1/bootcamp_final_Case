@@ -1,0 +1,37 @@
+{
+  "navbar": {
+    "title": "N11 Bootcamp",
+    "home": "Anasayfa",
+    "cart": "Sepet",
+    "login": "Giriş Yap",
+    "logout": "Çıkış Yap",
+    "welcome": "Hoş geldin, {name}",
+    "orders": "Siparişlerim"
+  },
+  "home": {
+    "all_products": "Tüm Ürünler",
+    "no_products": "Henüz vitrinde ürün bulunmuyor veya Backend kapalı."
+  },
+  "cart": {
+    "add_to_cart": "Sepete Ekle",
+    "out_of_stock": "Stokta Yok",
+    "clear_cart": "Sepeti Temizle",
+    "products": "Ürünler",
+    "quantity": "Adet",
+    "buy": "Satın Al"
+  },
+  "checkout": {
+    "title": "Satın Alma ve Ödeme",
+    "pay": "Öde",
+    "delivery_info": "Teslimat Bilgisi",
+    "card_info": "Kart Bilgileri",
+    "complete_payment": "Ödemeyi Tamamla",
+    "back_to_cart": "Sepete Dön",
+    "order_summary": "Sipariş Özeti",
+    "subtotal": "Ara Toplam",
+    "shipping": "Kargo",
+    "free": "Bedava",
+    "total": "Toplam",
+    "empty_cart_warning": "Sipariş oluşturmak için sepete ürün ekleyin."
+  }
+}

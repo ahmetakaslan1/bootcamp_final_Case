@@ -24,8 +24,7 @@ public class InventoryServiceImpl implements InventoryService {
     public InventoryResponse getInventoryByProductId(Long productId) {
         log.info("Stok bilgisi sorgulanıyor, Product ID: {}", productId);
 
-       // depoda ürün yoksa hata fırlatma, stok 0 olarak dön.
-        // null  yememek için bu sektörde kullanılıyor muş ve bende eledim
+    
         return inventoryRepository.findByProductId(productId)
                 .map(inventory -> new InventoryResponse(
                         inventory.getProductId(),
@@ -53,8 +52,7 @@ public class InventoryServiceImpl implements InventoryService {
             throw new IllegalArgumentException("Ürün doğrulaması başarısız oldu! Product ID: " + request.productId(), e);
         }
 
-        // MİMARİ DOKUNUŞ (Upsert): Eğer veritabanında varsa getir, yoksa YENİ nesne oluştur.
-        // Bu sayede daha önce hiç eklenmemiş bir ürüne doğrudan stok girebiliriz.
+        
         Inventory inventory = inventoryRepository.findByProductIdForUpdate(request.productId())
                 .orElseGet(() -> Inventory.builder()
                         .productId(request.productId())
@@ -76,7 +74,7 @@ public class InventoryServiceImpl implements InventoryService {
     public void deductInventory(Long productId, Integer quantityToDeduct) {
         log.info("Stok düşülüyor. Product ID: {}, Düşülecek Miktar: {}", productId, quantityToDeduct);
 
-        // Stok düşerken Pessimistic Lock (findByProductIdForUpdate) kullanıyoruz.
+     
         Inventory inventory = inventoryRepository.findByProductIdForUpdate(productId)
                 .orElseThrow(() -> new IllegalArgumentException("Stok düşülemedi! Depoda böyle bir ürün yok. Product ID: " + productId));
 
