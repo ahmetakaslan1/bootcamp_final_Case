@@ -55,10 +55,16 @@ services:
   keycloak:
     image: quay.io/keycloak/keycloak:24.0.0
     container_name: keycloak-server
-    command: start-dev
+    # HTTP üzerinden erişime izin veren ve strict modları kapatan komutlar eklendi
+    command: 
+      - start-dev
+      - --http-enabled=true
+      - --hostname-strict=false
+      - --hostname-strict-https=false
     environment:
       KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
       KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_PASSWORD}
+      KC_PROXY: edge
     ports:
       - "9090:8080"
     volumes:
@@ -99,7 +105,7 @@ services:
         SERVICE_NAME: api-gateway
     container_name: api-gateway
     ports:
-      - "8080:8080" # API Gateway dışarı açtım
+      - "8080:8080"
     environment:
       - SPRING_PROFILES_ACTIVE=prod
       - FRONTEND_URL=${FRONTEND_URL}
@@ -222,6 +228,9 @@ services:
     environment:
       - API_GATEWAY_URL=http://api-gateway:8080
       - NEXT_PUBLIC_API_URL=${FRONTEND_URL}/api/v1
+      # Eksik olan kritik güvenlik anahtarları eklendi
+      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
+      - NEXTAUTH_URL=${FRONTEND_URL}
     networks:
       - ecommerce-net
     depends_on:
