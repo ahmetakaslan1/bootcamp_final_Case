@@ -22,8 +22,9 @@ interface PageData {
 // Next.js App Router'da SSR (Server-Side) olarak direkt fetch yapıyoruz.
 async function getProducts(page: number = 0): Promise<PageData> {
   try {
+    const baseUrl = process.env.API_GATEWAY_URL || "http://api-gateway:8080";
     // API Gateway üzerinden product-service'e istek, page parametresini ekliyoruz
-    const res = await fetch(`http://localhost:8080/api/v1/products?page=${page}&size=12`, {
+    const res = await fetch(`http://${baseUrl}:8080/api/v1/products?page=${page}&size=12`, {
       cache: "no-store", // Her seferinde güncel datayı çekmesi için
     });
 
@@ -33,7 +34,7 @@ async function getProducts(page: number = 0): Promise<PageData> {
     }
 
     const data = await res.json();
-    
+
     // ApiResponse formatı -> { data: { content: [], totalPages: x, number: y } }
     if (data && data.data && Array.isArray(data.data.content)) {
       return {
@@ -42,7 +43,7 @@ async function getProducts(page: number = 0): Promise<PageData> {
         number: data.data.number || 0,
       };
     }
-    
+
     console.error("Beklenmeyen API veri formatı. Bir dizi (Array) bulunamadı:", data);
     return { content: [], totalPages: 0, number: 0 };
   } catch (error) {
@@ -69,7 +70,7 @@ export default async function Home({
         <div className="flex justify-between items-end mb-8">
           <h2 className="text-3xl font-bold text-slate-800 tracking-tight"><TranslatedText i18nKey="home.all_products" /></h2>
         </div>
-        
+
         {products.length === 0 ? (
           <div className="text-center py-20">
             <p className="text-xl text-slate-500"><TranslatedText i18nKey="home.no_products" /></p>
@@ -95,7 +96,7 @@ export default async function Home({
             ))}
           </div>
         )}
-        
+
         {/* Pagination Bileşeni */}
         {products.length > 0 && (
           <Pagination totalPages={pageData.totalPages} currentPage={pageData.number} />
